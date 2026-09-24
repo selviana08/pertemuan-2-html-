@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hasil Biodata</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        padding: 30px;
+      }
+
+      .container {
+        width: 500px;
+        max-width: 90%;
+        margin: auto;
+        background-color: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #ccc;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      .data {
+        margin: 15px 0;
+        padding: 10px;
+        background-color: #f7f7f7;
+        border-radius: 5px;
+      }
+
+      .label {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Hasil Biodata</h1>
+
+      <div class="data">
+        <span class="label">Nama:</span>
+        <span id="nama"></span>
+      </div>
+
+      <div class="data">
+        <span class="label">Tempat Lahir:</span>
+        <span id="tempat"></span>
+      </div>
+
+      <div class="data">
+        <span class="label">Tanggal Lahir:</span>
+        <span id="tanggal"></span>
+      </div>
+
+      <div class="data">
+        <span class="label">Hobi:</span>
+        <span id="hobi"></span>
+      </div>
+
+      <div class="data">
+        <span class="label">Jenis Kelamin:</span>
+        <span id="jk"></span>
+      </div>
+
+      <div class="data">
+        <span class="label">Deskripsi:</span>
+        <span id="deskripsi"></span>
+      </div>
+
+      <div class="data">
+        <span class="label">Agama:</span>
+        <span id="agama"></span>
+      </div>
+    </div>
+
+    <script>
+      const data = new URLSearchParams(window.location.search);
+
+      // Nama
+      document.getElementById("nama").textContent = data.get("nama") || "-";
+
+      // Tempat lahir
+      document.getElementById("tempat").textContent =
+        data.get("tmpt_lahir") || "-";
+
+      // Tanggal lahir
+      document.getElementById("tanggal").textContent =
+        data.get("tgl_lahir") || "-";
+
+      // Hobi
+      let hobi = data.getAll("hobi[]");
+
+      if (hobi.length === 0) {
+        hobi = data.getAll("hobi");
+      }
+
+      document.getElementById("hobi").textContent =
+        hobi.length > 0 ? hobi.join(", ") : "-";
+
+      // Jenis kelamin
+      let jenisKelamin = data.get("jk");
+
+      if (jenisKelamin === "p") {
+        jenisKelamin = "Perempuan";
+      } else if (jenisKelamin === "l") {
+        jenisKelamin = "Laki-laki";
+      }
+
+      document.getElementById("jk").textContent = jenisKelamin || "-";
+
+      // Deskripsi
+      document.getElementById("deskripsi").textContent =
+        data.get("deskripsi") || "-";
+
+      // Agama
+      document.getElementById("agama").textContent = data.get("agama") || "-";
+    </script>
+  </body>
+</html>
